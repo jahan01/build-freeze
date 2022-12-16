@@ -60,9 +60,19 @@ jobs:
     - name: Build package
       run: python bundle.py
 
-    - name: List dist
-      run: ls -lR
+    - name: List dist ${{ matrix.os }}
+      if: runner.os == 'Linux' || runner.os == 'macOS'
+      run: ls -lR dist
 
+    - name: List dist ${{ matrix.os }}
+      if: runner.os == 'Windows'
+      run: dir /s /b /o:gn dist
+
+    - uses: actions/upload-artifact@v3
+      with:
+        name: Bunk-${{ matrix.os }}
+        path: ./dist/Bunk/
+        retention-days: 1
     # - name: Load Release URL File from release job
     #   uses: actions/download-artifact@v1
     #   with:
