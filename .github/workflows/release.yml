@@ -28,7 +28,7 @@ jobs:
 
   build:
     name: Build packages
-    needs: create-release
+    # needs: create-release
     runs-on: ${{ matrix.os }}
 
     strategy:
