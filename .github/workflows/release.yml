@@ -84,7 +84,7 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: Bunk-${{ matrix.os }}
-          path: Bunk-${{ matrix.os }}.zip
+          path: ./dist/Bunk-${{ matrix.os }}.zip
           retention-days: 1
 
       # - name: Load Release URL File from release job
