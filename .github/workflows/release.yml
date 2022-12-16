@@ -42,10 +42,13 @@ jobs:
         include:
           - os: macos-10.15
             CMD_LIST_DIR: ls -lR
+            BUILD_OUTPUT_DIR: Bunk.app
           - os: ubuntu-18.04
             CMD_LIST_DIR: ls -lR
+            BUILD_OUTPUT_DIR: Bunk
           - os: windows-2019
             CMD_LIST_DIR: tree /f
+            BUILD_OUTPUT_DIR: Bunk
 
 
     steps:
@@ -71,11 +74,19 @@ jobs:
       - name: List dist
         run: ${{ matrix.CMD_LIST_DIR}} dist
 
+      - name: Archive Build
+        uses: thedoctor0/zip-release@main
+        with:
+          type: zip
+          directory: dist
+          filename: Bunk-${{ matrix.os }}.zip
+
       - uses: actions/upload-artifact@v3
         with:
           name: Bunk-${{ matrix.os }}
-          path: ./dist/Bunk/
+          path: Bunk-${{ matrix.os }}.zip
           retention-days: 1
+
       # - name: Load Release URL File from release job
       #   uses: actions/download-artifact@v1
       #   with:
