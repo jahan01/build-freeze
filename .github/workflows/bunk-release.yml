@@ -3,7 +3,11 @@ name: Release
 on:
   workflow_dispatch:
   push:
-    branches: [ master ]
+    branches:
+      - master
+    paths:
+      - .github/workflows/bunk-release.yml
+
 
 jobs:
 
