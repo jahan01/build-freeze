@@ -1,4 +1,4 @@
-name: Release
+name: Release Bunk
 
 on:
   workflow_dispatch:
