@@ -1,0 +1,71 @@
+name: Release paytm checker
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+    paths:
+      - .github/workflows/paytm-checker-release.yml
+
+
+jobs:
+
+  build:
+    name: Build packages
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os:
+          - macos-10.15
+          - ubuntu-18.04
+          - windows-2019
+        include:
+          - os: macos-10.15
+            CMD_LIST_DIR: ls -lR
+            BUILD_OUTPUT_DIR: Bunk.app
+          - os: ubuntu-18.04
+            CMD_LIST_DIR: ls -lR
+            BUILD_OUTPUT_DIR: Bunk
+          - os: windows-2019
+            CMD_LIST_DIR: tree /f
+            BUILD_OUTPUT_DIR: Bunk
+
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          repository: jahan01/bunk-paytm
+          ssh-key: ${{ secrets.PAYTM_CHECKER_DEPLOY_KEY }}
+
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements/base.txt
+          pip install -r requirements/build.txt
+
+      - name: Build package
+        run: |
+          pyrcc5 resources.qrc -o src/resources.py
+          python bundle.py
+
+      - name: List dist
+        run: ${{ matrix.CMD_LIST_DIR}} dist
+
+      - name: Archive Build
+        uses: thedoctor0/zip-release@main
+        with:
+          type: zip
+          directory: dist
+          filename: Paytm-checker-${{ matrix.os }}.zip
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: Paytm-checker-${{ matrix.os }}
+          path: ./dist/Paytm-checker-${{ matrix.os }}.zip
