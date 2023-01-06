@@ -76,6 +76,7 @@ jobs:
       - name: Build package
         run: |
           pyrcc5 resources.qrc -o src/frontend/views/resources.py
+          git update-index --skip-worktree src/frontend/views/resources.py
           python bundle.py
 
       - name: List dist
