@@ -2,6 +2,11 @@ name: Release Bunk
 
 on:
   workflow_dispatch:
+    inputs:
+      ref:
+        type: string
+        default: ''
+        description: Target branch or ref to run build against
   push:
     branches:
       - main
@@ -60,6 +65,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           repository: jahan01/bunk-qt
+          ref: ${{ inputs.ref }}
           ssh-key: ${{ secrets.BUNK_DEPLOY_KEY }}
 
       - name: Set up Python 3.9
