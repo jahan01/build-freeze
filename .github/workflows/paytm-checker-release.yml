@@ -51,9 +51,7 @@ jobs:
           pip install -r requirements/build.txt
 
       - name: Build package
-        run: |
-          pyrcc5 resources.qrc -o src/resources.py
-          python bundle.py
+        run: python bundle.py
 
       - name: List dist
         run: ${{ matrix.CMD_LIST_DIR}} dist
