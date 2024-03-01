@@ -89,7 +89,7 @@ jobs:
           which pip
           python -m pip install --upgrade pip
           sed -i.bac 's/pyodbc==4.0.39/pyodbc==5.1.0/g' requirements/base.txt
-          more requirements/base.tx
+          more requirements/base.txt
           pip install -r requirements/base.txt
           pip install -r requirements/build.txt
 
