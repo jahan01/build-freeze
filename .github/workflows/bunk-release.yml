@@ -77,7 +77,7 @@ jobs:
       - name: Install unixodbc
         if: matrix.os == 'macos-14'
         run: |
-          sed -i.backup "s/^pyodbc/ s/$/ --no-binary :all:/g" requirements/base.txt
+          sed -i.bac '/^pyodbc/ s/$/ --no-binary :all:/' requirements/base.txt
           brew install unixodbc
 
       - name: Install dependencies
