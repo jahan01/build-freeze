@@ -76,7 +76,7 @@ jobs:
 
       - name: Install unixodbc
         if: matrix.os == 'macos-14'
-        run: brew install unixodbc-dev
+        run: brew install unixodbc
 
       - name: Install dependencies
         run: |
