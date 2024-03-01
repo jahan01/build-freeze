@@ -48,18 +48,18 @@ jobs:
       matrix:
         os:
           - macos-14
-          - ubuntu-20.04
-          - windows-2019
+          # - ubuntu-20.04
+          # - windows-2019
         include:
           - os: macos-14
             CMD_LIST_DIR: ls -lR
             BUILD_OUTPUT_DIR: Bunk.app
-          - os: ubuntu-20.04
-            CMD_LIST_DIR: ls -lR
-            BUILD_OUTPUT_DIR: Bunk
-          - os: windows-2019
-            CMD_LIST_DIR: tree /f
-            BUILD_OUTPUT_DIR: Bunk
+          # - os: ubuntu-20.04
+          #   CMD_LIST_DIR: ls -lR
+          #   BUILD_OUTPUT_DIR: Bunk
+          # - os: windows-2019
+          #   CMD_LIST_DIR: tree /f
+          #   BUILD_OUTPUT_DIR: Bunk
 
 
     steps:
@@ -77,7 +77,7 @@ jobs:
       - name: Install unixodbc
         if: matrix.os == 'macos-14'
         run: |
-          sed -i '/^pyodbc/ s/$/ --no-binary :all:/' base.txt
+          sed -i '/^pyodbc/ s/$/ --no-binary :all:/' requirements/base.txt
           brew install unixodbc
 
       - name: Install dependencies
