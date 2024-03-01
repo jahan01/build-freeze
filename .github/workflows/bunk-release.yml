@@ -76,14 +76,15 @@ jobs:
 
       - name: Install unixodbc
         if: matrix.os == 'macos-14'
-        # sed -i.bac '/^pyodbc/ s/$/ --no-binary :all:/' requirements/base.txt
         run: |
+          sed -i.bac '/^pyodbc/ s/$/ --no-binary :all:/' requirements/base.txt
           more requirements/base.txt
           brew install unixodbc
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
+          pip install -r requirements/base.txt.bac
           pip install -r requirements/base.txt
           pip install -r requirements/build.txt
 
@@ -104,6 +105,11 @@ jobs:
         with:
           name: Bunk-${{ matrix.os }}
           path: ./dist/Bunk-${{ matrix.os }}.zip
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: base.txt
+          path: requirements/base.txt
 
       # - name: Load Release URL File from release job
       #   uses: actions/download-artifact@v1
