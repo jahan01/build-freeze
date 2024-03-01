@@ -76,7 +76,9 @@ jobs:
 
       - name: Install unixodbc
         if: matrix.os == 'macos-14'
-        run: brew install unixodbc
+        run: |
+          sed -i '/^pyodbc/ s/$/ --no-binary :all:/' base.txt
+          brew install unixodbc
 
       - name: Install dependencies
         run: |
