@@ -28,7 +28,7 @@ jobs:
           - ubuntu-20.04
           - windows-2019
         include:
-          - os: macos-12
+          - os: macos-14
             CMD_LIST_DIR: ls -lR
             BUILD_OUTPUT_DIR: Bunk.app
           - os: ubuntu-20.04
