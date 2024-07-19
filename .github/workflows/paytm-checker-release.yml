@@ -1,7 +1,13 @@
 name: Release paytm checker
+run-name: Release Bunk (via ${{ github.event_name }} on ${{ inputs.ref }})
 
 on:
   workflow_dispatch:
+    inputs:
+      ref:
+        type: string
+        default: ''
+        description: Target branch or ref to run build against
   push:
     branches:
       - main
@@ -37,6 +43,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           repository: jahan01/bunk-paytm
+          ref: ${{ inputs.ref }}
           ssh-key: ${{ secrets.PAYTM_CHECKER_DEPLOY_KEY }}
 
       - name: Set up Python 3.9
