@@ -87,6 +87,11 @@ jobs:
           pip install -r requirements/base.txt
           pip install -r requirements/build.txt
 
+      - name: Install dependencies (windows)
+        if: matrix.os == 'windows-2019'
+        run: |
+          pip install -r requirements/windows.txt
+
       - name: Build package
         run: python bundle.py
 
