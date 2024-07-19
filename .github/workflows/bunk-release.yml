@@ -17,31 +17,8 @@ on:
 
 jobs:
 
-  # create-release:
-  #   name: Create Release
-  #   runs-on: ubuntu-18.04
-  #   steps:
-  #   - name: Create Release
-  #     id: create_release
-  #     uses: actions/create-release@v1
-  #     env:
-  #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  #     with:
-  #       tag_name: ${{ github.ref }}
-  #       release_name: Release ${{ github.ref }}
-  #       draft: false
-  #       prerelease: true
-  #   - name: Output Release URL File
-  #     run: echo "${{ steps.create_release.outputs.upload_url }}" > release_url.txt
-  #   - name: Save Release URL File for publish
-  #     uses: actions/upload-artifact@v1
-  #     with:
-  #       name: release_url
-  #       path: release_url.txt
-
   build:
     name: Build packages
-    # needs: create-release
     runs-on: ${{ matrix.os }}
 
     strategy:
@@ -53,13 +30,10 @@ jobs:
         include:
           - os: macos-14
             CMD_LIST_DIR: ls -lR
-            BUILD_OUTPUT_DIR: Bunk.app
           - os: ubuntu-20.04
             CMD_LIST_DIR: ls -lR
-            BUILD_OUTPUT_DIR: Bunk
           - os: windows-2019
             CMD_LIST_DIR: tree /f
-            BUILD_OUTPUT_DIR: Bunk
 
 
     steps:
@@ -109,25 +83,3 @@ jobs:
         with:
           name: Bunk-${{ matrix.os }}
           path: ./dist/Bunk-${{ matrix.os }}.zip
-
-      # - name: Load Release URL File from release job
-      #   uses: actions/download-artifact@v1
-      #   with:
-      #     name: release_url
-
-      # - name: Get Release File Name & Upload URL
-      #   id: get_release_info
-      #   shell: bash
-      #   run: |
-      #     value=`cat release_url/release_url.txt`
-      #     echo ::set-output name=upload_url::$value
-
-      # - name: Upload Release Asset
-      #   id: upload-release-asset
-      #   uses: actions/upload-release-asset@v1
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   with:
-      #     upload_url: ${{ steps.get_release_info.outputs.upload_url }}
-      #     asset_path: ./dist/**
-      #     asset_name: Bunk-${{ matrix.os }}

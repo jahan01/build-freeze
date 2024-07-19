@@ -30,13 +30,10 @@ jobs:
         include:
           - os: macos-14
             CMD_LIST_DIR: ls -lR
-            BUILD_OUTPUT_DIR: Bunk.app
           - os: ubuntu-20.04
             CMD_LIST_DIR: ls -lR
-            BUILD_OUTPUT_DIR: Bunk
           - os: windows-2019
             CMD_LIST_DIR: tree /f
-            BUILD_OUTPUT_DIR: Bunk
 
 
     steps:
