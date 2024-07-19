@@ -1,5 +1,5 @@
 name: Release paytm checker
-run-name: Release Bunk (via ${{ github.event_name }} on ${{ inputs.ref }})
+run-name: Release paytm checker (via ${{ github.event_name }} on ${{ inputs.ref }})
 
 on:
   workflow_dispatch:
