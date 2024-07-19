@@ -28,7 +28,7 @@ jobs:
           - ubuntu-20.04
           - windows-2019
         include:
-          - os: macos-14
+          - os: macos-12
             CMD_LIST_DIR: ls -lR
           - os: ubuntu-20.04
             CMD_LIST_DIR: ls -lR
