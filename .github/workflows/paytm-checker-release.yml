@@ -25,13 +25,13 @@ jobs:
       matrix:
         os:
           - macos-12
-          - ubuntu-20.04
+          # - ubuntu-20.04
           - windows-2019
         include:
           - os: macos-12
             CMD_LIST_DIR: ls -lR
-          - os: ubuntu-20.04
-            CMD_LIST_DIR: ls -lR
+          # - os: ubuntu-20.04
+          #   CMD_LIST_DIR: ls -lR
           - os: windows-2019
             CMD_LIST_DIR: tree /f
 
