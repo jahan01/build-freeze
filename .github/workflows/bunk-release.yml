@@ -30,10 +30,13 @@ jobs:
         include:
           - os: macos-14
             CMD_LIST_DIR: ls -lR
+            ZIP_CUSTOM_PARAMS: --symlinks
           - os: ubuntu-20.04
             CMD_LIST_DIR: ls -lR
+            ZIP_CUSTOM_PARAMS: --symlinks
           - os: windows-2019
             CMD_LIST_DIR: tree /f
+            ZIP_CUSTOM_PARAMS: ""
 
 
     steps:
@@ -78,6 +81,7 @@ jobs:
           type: zip
           directory: dist
           filename: Bunk-${{ matrix.os }}.zip
+          custom: ${{ matrix.ZIP_CUSTOM_PARAMS }}
 
       - uses: actions/upload-artifact@v3
         with:
