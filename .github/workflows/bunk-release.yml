@@ -78,6 +78,7 @@ jobs:
           type: zip
           directory: dist
           filename: Bunk-${{ matrix.os }}.zip
+          custom: --symlinks
 
       - uses: actions/upload-artifact@v3
         with:
