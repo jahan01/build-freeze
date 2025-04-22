@@ -37,7 +37,7 @@ jobs:
 
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           repository: jahan01/bunk-paytm
           ref: ${{ inputs.ref }}
@@ -72,7 +72,7 @@ jobs:
           directory: dist
           filename: Paytm-checker-${{ matrix.os }}.zip
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: Paytm-checker-${{ matrix.os }}
           path: ./dist/Paytm-checker-${{ matrix.os }}.zip

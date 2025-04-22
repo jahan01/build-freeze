@@ -40,7 +40,7 @@ jobs:
 
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           repository: jahan01/bunk-qt
           ref: ${{ inputs.ref }}
@@ -83,7 +83,7 @@ jobs:
           filename: Bunk-${{ matrix.os }}.zip
           custom: ${{ matrix.ZIP_CUSTOM_PARAMS }}
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: Bunk-${{ matrix.os }}
           path: ./dist/Bunk-${{ matrix.os }}.zip
