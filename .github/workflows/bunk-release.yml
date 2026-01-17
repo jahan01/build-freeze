@@ -68,7 +68,7 @@ jobs:
           uv sync --group build
 
       - name: Build package
-        run: python bundle.py
+        run: uv run python bundle.py
 
       - name: List dist
         run: ${{ matrix.CMD_LIST_DIR}} dist
