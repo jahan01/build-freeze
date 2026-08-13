@@ -55,7 +55,7 @@ jobs:
           pip install -r requirements/build.txt
 
       - name: Install dependencies (windows)
-        if: matrix.os == 'windows-2019'
+        if: matrix.os == 'windows-2022'
         run: |
           pip install -r requirements/windows.txt
 
